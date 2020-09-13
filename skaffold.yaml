@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: franciscoserrano/blog-backend
+      context: blog-backend
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'pkg/*.go'
+            dest: .

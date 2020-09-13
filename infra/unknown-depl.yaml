@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unknown-app-depl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: unknown-app
+  template:
+    metadata:
+      labels:
+        app: unknown-app
+    spec:
+      containers:
+        - name: blog-backend
+          image: franciscoserrano/unknown-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unknown-app-srv
+spec:
+  selector:
+    app: unknown-app
+  ports:
+    - name: blog-backend
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

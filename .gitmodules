@@ -1,0 +1,6 @@
+[submodule "blog-backend"]
+	path = blog-backend
+	url = https://github.com/francisco-serrano/blog-backend
+[submodule "blog-client"]
+	path = blog-client
+	url = https://github.com/francisco-serrano/blog-client
