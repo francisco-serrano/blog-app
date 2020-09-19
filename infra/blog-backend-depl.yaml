@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-backend-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blog-backend
+  template:
+    metadata:
+      labels:
+        app: blog-backend
+    spec:
+      containers:
+        - name: blog-backend
+          image: franciscoserrano/blog-backend
+          env:
+            - name: ENVIRONMENT
+              value: 'K8S'
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access-key
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret-key
+                  key: AWS_SECRET_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-backend-srv
+spec:
+  selector:
+    app: blog-backend
+  ports:
+    - name: blog-backend
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

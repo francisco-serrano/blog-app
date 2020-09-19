@@ -16,3 +16,12 @@ build:
         manual:
           - src: 'pkg/*.go'
             dest: .
+    - image: franciscoserrano/blog-client
+      context: blog-client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+
