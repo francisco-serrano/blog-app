@@ -18,6 +18,8 @@ spec:
           env:
             - name: ENVIRONMENT
               value: 'K8S'
+            - name: FILES_DIR
+              value: '/app/files'
             - name: AWS_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
